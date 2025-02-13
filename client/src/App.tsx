@@ -30,7 +30,7 @@ class App extends React.Component<any, any> {
             return;
         }
 
-        const collaboraApi = "https://teste-apicollabora.lxmrnj.easypanel.host"
+        const collaboraApi = "https://teste-apicollabora2.lxmrnj.easypanel.host"
 
         let wopiSrc = `${collaboraApi}/wopi/files/1`;
         // wopiSrc = wopiSrc.replace("http://", "https://");   
