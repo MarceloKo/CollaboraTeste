@@ -47,6 +47,22 @@ class App extends React.Component<any, any> {
                     token: accessToken
                 })
             })
+
+        const collaboraApi2 = "https://teste-apicollabora.lxmrnj.easypanel.host"
+
+        fetch(`${collaboraApi2}/collaboraUrl?server=${wopiClientHost}`)
+            .then(response => response.json())
+            .then(data => {
+                const wopiClientUrl = data.url
+                const accessToken = "seuTokenValido";
+                const wopiUrl = `${wopiClientUrl}WOPISrc=${wopiSrc}&access_token=seuTokenValido`;
+                console.log(`wopiUrl: ${wopiUrl}`)
+                this.setState({
+                    startLoading: true,
+                    wopiUrl: wopiUrl,
+                    token: accessToken
+                })
+            })
     }
 
     componentDidUpdate() {
