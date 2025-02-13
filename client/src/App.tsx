@@ -9,7 +9,7 @@ class App extends React.Component<any, any> {
         this.handleInputChanged = this.handleInputChanged.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
-            serverAddress: '',
+            serverAddress: 'https://teste-collabora.lxmrnj.easypanel.host',
             startLoading: false,
             wopiUrl: '',
             token: ''
@@ -20,10 +20,7 @@ class App extends React.Component<any, any> {
     }
 
     handleSubmit() {
-        const locationOrigin = window.location.origin;
-        const scheme = locationOrigin.startsWith('https') ? 'https' : 'http';
         const wopiClientHost = this.state.serverAddress;
-        console.log(wopiClientHost, scheme)
         if (!wopiClientHost) {
             alert('No server address entered');
             return;
@@ -32,14 +29,12 @@ class App extends React.Component<any, any> {
             alert('Warning! You have to specify the scheme protocol too (http|https) for the server address.')
             return;
         }
-        if (!wopiClientHost.startsWith(scheme + '://')) {
-            alert('Collabora Online server address scheme does not match the current page url scheme');
-            return;
-        }
 
-        let wopiSrc = `${locationOrigin}/wopi/files/123`;
+        const collaboraApi = "https://teste-apicollabora.lxmrnj.easypanel.host"
+
+        let wopiSrc = `${collaboraApi}/wopi/files/1`;
         // wopiSrc = wopiSrc.replace("http://", "https://");   
-        fetch(`http://localhost:3001/collaboraUrl?server=${wopiClientHost}`)
+        fetch(`${collaboraApi}/collaboraUrl?server=${wopiClientHost}`)
             .then(response => response.json())
             .then(data => {
                 const wopiClientUrl = data.url
