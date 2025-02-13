@@ -1,7 +1,5 @@
-import express from 'express';
-
-let router = express.Router();
-export default router;
+var express = require('express');
+var router = express.Router();
 
 /* *
  *  wopi CheckFileInfo endpoint
@@ -12,7 +10,7 @@ export default router;
  *  The CheckFileInfo wopi endpoint is triggered by a GET request at
  *  https://HOSTNAME/wopi/files/<document_id>
  */
-router.get('/files/:fileId', (req, res) => {
+router.get('/files/:fileId', function(req, res) {
 	console.log('file id: ' + req.params.fileId);
 	// test.txt is just a fake text file
 	// the Size property is the length of the string
@@ -21,8 +19,7 @@ router.get('/files/:fileId', (req, res) => {
 		BaseFileName: 'test.txt',
 		Size: 11,
 		UserId: 1,
-		UserCanWrite: true,
-		EnableInsertRemoteImage: true,
+		UserCanWrite: true
 	});
 });
 
@@ -33,12 +30,12 @@ router.get('/files/:fileId', (req, res) => {
  *  The GetFile wopi endpoint is triggered by a request with a GET verb at
  *  https://HOSTNAME/wopi/files/<document_id>/contents
  */
-router.get('/files/:fileId/contents', (req, res) => {
+router.get('/files/:fileId/contents', function(req, res) {
 	// we just return the content of a fake text file
 	// in a real case you should use the file id
 	// for retrieving the file from the storage and
 	// send back the file content as response
-	const fileContent = 'Hello world!123';
+	var fileContent = 'Hello world!';
 	res.send(fileContent);
 });
 
@@ -49,7 +46,7 @@ router.get('/files/:fileId/contents', (req, res) => {
  *  The PutFile wopi endpoint is triggered by a request with a POST verb at
  *  https://HOSTNAME/wopi/files/<document_id>/contents
  */
-router.post('/files/:fileId/contents', (req, res) => {
+router.post('/files/:fileId/contents', function(req, res) {
 	// we log to the console so that is possible
 	// to check that saving has triggered this wopi endpoint
 	console.log('wopi PutFile endpoint');
@@ -62,3 +59,5 @@ router.post('/files/:fileId/contents', (req, res) => {
 		res.sendStatus(404);
 	}
 });
+
+module.exports = router;
